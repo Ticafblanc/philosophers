@@ -1,0 +1,7 @@
+{
+    "makefile.extensionOutputFolder": "./.vscode",
+    "files.associations": {
+        "philosophers.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "Enabled"
+}

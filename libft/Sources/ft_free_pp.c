@@ -12,7 +12,7 @@
 
 #include <libft.h>
 
-void	ft_free_pp(char **argv)
+void	ft_free_pp(void **argv)
 {
 	int	i;
 
