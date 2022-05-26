@@ -123,47 +123,13 @@ norm:
 		@norminette $(SRC_PATH)
 		@printf "${NOCOL}"
 
-all_test: test_error test
+all_test: 
 
-test: big mini mandatory bonus height long
+test1: 
+		@./Bin/philosophers 10 10000 1000 1000
 
-big:
-		@leaks -atExit -- ./Bin/so_long Maps/test/big.ber
-
-height:
-		@leaks -atExit -- ./Bin/so_long Maps/test/height.ber
-
-long:
-		@leaks -atExit -- ./Bin/so_long Maps/test/long.ber
-
-mini:
-		@leaks -atExit -- ./Bin/so_long Maps/test/mini.ber
-
-mandatory:
-		@leaks -atExit -- ./Bin/so_long Maps/test/mandatory.ber
-
-bonus:
-		@leaks -atExit -- ./Bin/so_long Maps/test/bonus.ber
-
-test_error: bad_extension open_1 open_2 open_3 square
-
-bad_path:
-		@leaks -atExit -- ./Bin/so_long Maps/error/bad_extension.ber
-
-bad_extension:
-		@leaks -atExit -- ./Bin/so_long Maps/error/bad_extension.bir
-
-open_1:
-		@leaks -atExit -- ./Bin/so_long Maps/error/open_1.ber
-
-open_2:
-		@leaks -atExit -- ./Bin/so_long Maps/error/open_2.ber
-
-open_3:
-		@leaks -atExit -- ./Bin/so_long Maps/error/open_3.ber
-
-square:
-		@leaks -atExit -- ./Bin/so_long Maps/error/square.ber
+test2: 
+		@./Bin/philosophers 10 1000 1000 1000
 
 push:
 		@git add .

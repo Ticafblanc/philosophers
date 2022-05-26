@@ -23,7 +23,8 @@ int	main(int argc, char **argv)
 	flag = init_global(&global, argv);
 	if (flag)
 		return (free_philo(global, flag));
-	pthread_create(&global->arg->thread_id_health, NULL, loop_healt, global);
+	pthread_create(&global->thread_id_start, NULL, start_philo, global);
+	pthread_create(&global->thread_id_health, NULL, loop_healt, global);
 	flag = wait_philo(global);
 	return (free_philo(global, flag));
 }
