@@ -55,15 +55,6 @@ void    *loop_healt(void *global_void)
     return (0);
 }
 
-void    put_success(t_global *global, int statut)
-{
-    pthread_mutex_lock(&global->print);
-    if (statut == DEAD)
-        printf("🕛%lld ⚰️the king is dead !!", timestamp());
-    else if (statut == DONE)
-        printf("🙅they have full bellies !!");
-}
-
 int wait_philo(t_global *global)
 {
     int         id;
@@ -72,11 +63,13 @@ int wait_philo(t_global *global)
     id = 0;
     philo = global->philo;
     pthread_join(global->thread_id_health, NULL);
+    //printf("\n\nglobal->statut = %d\n\n", global->statut);
     while (id < global->number_of_philosophers)
     {
         pthread_mutex_destroy(&(philo[id]->fork));
+        id++;
     }
-    printf("\n\nglobal->statut = %d\n\n", global->statut);
+    //printf("\n\nglobal->statut = %d\n\n", global->statut);
     pthread_mutex_destroy(&global->print);
     pthread_mutex_destroy(&global->start);
     if (global->number_of_times_each_philosopher_must_eat == 0)

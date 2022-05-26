@@ -7,7 +7,7 @@ int	init_philo(t_global **global)
 
 	id = 0;
 	
-	(*global)->philo = (t_philo **)malloc(((*global)->number_of_philosophers) * sizeof(t_philo *));
+	(*global)->philo = (t_philo **)malloc(((*global)->number_of_philosophers + 1) * sizeof(t_philo *));
 	if (!(*global)->philo)
 		return (3);
 	philo = (*global)->philo;

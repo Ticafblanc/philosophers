@@ -1,9 +1,22 @@
 #include <philosophers.h>
 
+void    put_success(t_global *global, int statut)
+{
+    pthread_mutex_lock(&global->print);
+    if (statut == DEAD)
+        printf("🕛%lld ⚰️the king is dead !!\n", timestamp());
+    else if (statut == DONE)
+        printf("🙅they have full bellies !!\n");
+	pthread_mutex_unlock(&global->print);
+}
+
 int	put_philo(t_philo *philo, int statut)
 {
 	if (philo->global->statut == DEAD || philo->global->statut == DONE)
+	{
+		pthread_mutex_unlock(&philo->global->print);
 		return (0);
+	}
 	pthread_mutex_lock(&philo->global->print);
 	if (statut == OWN_FORK || statut == RIGHT_FORK)
 		printf("🕛%lld 🤬%d has taken a 🍴fork\n", timestamp(), philo->philo_id);

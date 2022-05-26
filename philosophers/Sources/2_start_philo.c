@@ -12,7 +12,6 @@ void	*loop_philo(void *philo_void)
 	while (philo->global->statut == ALIVE
             && philo->global->number_of_times_each_philosopher_must_eat != 0)
     {
-        //printf("statut = %d", philo->global->statut);
         put_philo(philo, philo->statut);
         sleep_check(philo->global, philo->statut);
         if (philo->statut == THINK && philo->global->statut == ALIVE)
@@ -27,8 +26,6 @@ void	*loop_philo(void *philo_void)
             philo->statut = THINK;
     }
     free_fork(philo->global, philo->philo_id);
-    pthread_mutex_unlock(&philo->global->print);
-    printf("statut ID = %d", philo->philo_id);
     return (0);
 }
 
@@ -44,7 +41,6 @@ void    *start_philo(void *global_void)
     pthread_mutex_lock(&global->start);
     while (id < global->number_of_philosophers)
     {
-        //printf("\nthread = %d\n", philo[id]->philo_id);
         pthread_create(&(philo[id]->thread_id), NULL, loop_philo, philo[id]);
         pthread_detach(global->philo[id]->thread_id);
         id++;

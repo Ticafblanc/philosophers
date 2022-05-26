@@ -77,6 +77,7 @@ void    	*loop_healt(void *global_void);
 int 		wait_philo(t_global *global);
 
 	//5_put_philo.c
+void    	put_success(t_global *global, int statut);
 int			put_error(int flag);
 int			put_philo(t_philo *philo, int flag);
 int			free_philo(t_global	*global, int error);
