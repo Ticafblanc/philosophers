@@ -35,10 +35,7 @@ void    loop_healt(t_global *global)
         {
             if ((philo[id]->last_meal_timestamp + global->time_to_die)
                 < global->timestamp)
-                {
                     global->statut = DEAD;
-                }
-               
             if (global->number_of_times_each_philosopher_must_eat == 0)
                 global->statut = DONE;
         }       
@@ -54,6 +51,7 @@ int wait_philo(t_global *global)
 
     id = 0;
     philo = global->philo;
+    usleep(100000);
     while (id < global->number_of_philosophers)
     {
         pthread_mutex_destroy(&(philo[id]->fork));

@@ -52,7 +52,7 @@ int	init_global(t_global **global, char **argv)
 	(*global)->time_to_eat = fill_data(argv[3]);
 	(*global)->time_to_sleep = fill_data(argv[4]);
 	if (argv[5])
-		(*global)->number_of_times_each_philosopher_must_eat = fill_data(argv[5]);
+		(*global)->number_of_times_each_philosopher_must_eat = fill_data(argv[5]) * (*global)->number_of_philosophers;
 	else
 		(*global)->number_of_times_each_philosopher_must_eat = -1;
 	if ((*global)->number_of_philosophers < 1 || (*global)->time_to_die < 0
