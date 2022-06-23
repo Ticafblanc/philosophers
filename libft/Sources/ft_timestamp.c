@@ -12,7 +12,7 @@
 
 #include <libft.h>
 
-long long	timestamp(void)
+long long	ft_timestamp(void)
 {
 	struct timeval	t;
 

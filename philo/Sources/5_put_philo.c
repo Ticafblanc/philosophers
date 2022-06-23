@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   5_put_philo.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdoquocb <mdoquocb@student.42quebec>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/22 14:10:39 by mdoquocb          #+#    #+#             */
+/*   Updated: 2022/06/22 14:10:41 by mdoquocb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <philo.h>
 
-void    put_success(t_philo *philo, int statut)
+void	put_success(t_philo *philo, int statut)
 {
-    pthread_mutex_lock(&philo->global->print);
-    if (statut == DEAD)
-        printf("%d %d died\n", philo->global->timestamp, philo->philo_id);
-    else if (statut == DONE)
-        printf("done\n");
+	pthread_mutex_lock(&philo->global->print);
+	if (statut == DEAD)
+		printf("%d %d died\n", philo->global->timestamp, philo->philo_id);
+	else if (statut == DONE)
+		printf("done\n");
 	philo->global->stat = OFF;
 	pthread_mutex_unlock(&philo->global->print);
 }
@@ -16,8 +28,10 @@ int	put_philo(t_philo *philo, int statut)
 	if (philo->global->statut != ALIVE)
 		return (0);
 	pthread_mutex_lock(&philo->global->print);
-	if ((statut == OWN_FORK || statut == RIGHT_FORK) && philo->global->statut == ALIVE)
-		printf("%d %d has taken a fork\n", philo->global->timestamp, philo->philo_id);
+	if ((statut == OWN_FORK || statut == RIGHT_FORK)
+		&& philo->global->statut == ALIVE)
+		printf("%d %d has taken a fork\n",
+			philo->global->timestamp, philo->philo_id);
 	else if (statut == EAT && philo->global->statut == ALIVE)
 		printf("%d %d is eating\n", philo->global->timestamp, philo->philo_id);
 	else if (statut == SLEEP && philo->global->statut == ALIVE)
@@ -66,7 +80,7 @@ int	free_philo_2(t_global *global, int flag)
 	}
 	return (EXIT_FAILURE);
 }
-	
+
 int	free_philo(t_global *global, int flag)
 {
 	if (flag == 1)

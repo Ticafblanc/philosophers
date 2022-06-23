@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   1_init_global.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdoquocb <mdoquocb@student.42quebec>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/22 14:07:19 by mdoquocb          #+#    #+#             */
+/*   Updated: 2022/06/22 14:07:23 by mdoquocb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <philo.h>
 
 int	init_philo(t_global **global)
@@ -6,8 +18,8 @@ int	init_philo(t_global **global)
 	t_philo	**philo;
 
 	id = 0;
-	
-	(*global)->philo = (t_philo **)malloc(((*global)->number_of_philosophers + 1) * sizeof(t_philo *));
+	(*global)->philo = (t_philo **)malloc
+		(((*global)->number_of_philosophers + 1) * sizeof(t_philo *));
 	if (!(*global)->philo)
 		return (3);
 	philo = (*global)->philo;
@@ -52,13 +64,14 @@ int	init_global(t_global **global, char **argv)
 	(*global)->time_to_eat = fill_data(argv[3]);
 	(*global)->time_to_sleep = fill_data(argv[4]);
 	if (argv[5])
-		(*global)->number_of_times_each_philosopher_must_eat = fill_data(argv[5]) * (*global)->number_of_philosophers;
+		(*global)->number_of_times_each_philosopher_must_eat
+			= fill_data(argv[5]) * (*global)->number_of_philosophers;
 	else
 		(*global)->number_of_times_each_philosopher_must_eat = -1;
 	if ((*global)->number_of_philosophers < 1 || (*global)->time_to_die < 0
 		|| (*global)->time_to_eat < 0 || (*global)->time_to_sleep < 0)
 		return (2);
 	if (pthread_mutex_init(&((*global)->print), NULL))
-			return (5);
+		return (5);
 	return (init_philo(global));
 }

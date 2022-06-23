@@ -18,13 +18,13 @@ int	main(int argc, char **argv)
 	int			flag;
 
 	flag = 0;
-	if (argc < 5 || argc > 6) 
+	if (argc < 5 || argc > 6)
 		return (put_error(flag));
 	flag = init_global(&global, argv);
 	if (flag)
 		return (free_philo(global, flag));
 	pthread_create(&(global->thread_id), NULL, start_time, global);
-    pthread_detach(global->thread_id);
+	pthread_detach(global->thread_id);
 	start_philo(global);
 	loop_healt(global);
 	flag = wait_philo(global);

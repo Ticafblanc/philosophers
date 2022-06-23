@@ -18,20 +18,19 @@
 # include <sys/time.h>
 # include <libft.h>
 
-	//define satut
-# define	ALIVE		0
-# define	THINK		1
-# define	OWN_FORK	2
-# define	RIGHT_FORK	3
-# define	EAT			4
-# define	SLEEP		5
-# define	DEAD		6
-# define	DONE		7
+# define ALIVE		0
+# define THINK		1
+# define OWN_FORK	2
+# define RIGHT_FORK	3
+# define EAT		4
+# define SLEEP		5
+# define DEAD		6
+# define DONE		7
 
-# define	ON		0
-# define	OFF		1
+# define ON			0
+# define OFF		1
 
-typedef struct s_philo t_philo;
+typedef struct s_philo	t_philo;
 
 typedef struct s_global
 {
@@ -54,7 +53,7 @@ typedef struct s_philo
 	int				philo_id;
 	int				statut;
 	pthread_mutex_t	fork;
-	int		last_meal_timestamp;
+	int				last_meal_timestamp;
 	int				number_eat;
 	t_global		*global;
 }				t_philo;
@@ -67,22 +66,22 @@ int			init_global(t_global **global, char **argv);
 	//2_start_philo.c
 void		*start_time(void *global_void);
 void		*loop_philo(void *philo_void);
-void    	start_philo(t_global *global);
+void		start_philo(t_global *global);
 
 	//3_utils_philo.c
-void   		right_fork(t_global	*global, int philo_id);
-void    	own_fork(t_global	*global, int philo_id);
-void    	eat_philo(t_philo *philo);
-void    	sleep_philo(t_philo *philo);
-void    	free_fork(t_global	*global, int philo_id);
+void		right_fork(t_global	*global, int philo_id);
+void		own_fork(t_global	*global, int philo_id);
+void		eat_philo(t_philo *philo);
+void		sleep_philo(t_philo *philo);
+void		free_fork(t_global	*global, int philo_id);
 
 	//4_end_philo.c
-void    	sleep_check(t_global	*global, int statut);
-void    	loop_healt(t_global *global);
-int 		wait_philo(t_global *global);
+void		sleep_check(t_global	*global, int statut);
+void		loop_healt(t_global *global);
+int			wait_philo(t_global *global);
 
 	//5_put_philo.c
-void    	put_success(t_philo *philo, int statut);
+void		put_success(t_philo *philo, int statut);
 int			put_error(int flag);
 int			put_philo(t_philo *philo, int flag);
 int			free_philo(t_global	*global, int error);
