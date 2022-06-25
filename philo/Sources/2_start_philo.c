@@ -19,10 +19,10 @@ void	*start_time(void *global_void)
 
 	global = (t_global *)global_void;
 	global->statut = ON;
-	timestamp_start = timestamp();
+	timestamp_start = ft_timestamp();
 	while (global->stat == ON)
 	{
-		global->timestamp = timestamp() - timestamp_start;
+		global->timestamp = ft_timestamp() - timestamp_start;
 		usleep(100);
 	}
 	return (0);
@@ -52,7 +52,7 @@ void	*loop_philo(void *philo_void)
 	philo = (t_philo *)philo_void;
 	philo->last_meal_timestamp = philo->global->timestamp;
 	if (philo->philo_id % 2)
-		usleep(philo->global->time_to_eat * 100 / 2);
+		usleep(15000);
 	else
 		own_fork(philo->global, philo->philo_id);
 	while (philo->global->statut == ALIVE)

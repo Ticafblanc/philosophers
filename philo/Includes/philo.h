@@ -79,6 +79,7 @@ void		free_fork(t_global	*global, int philo_id);
 void		sleep_check(t_global	*global, int statut);
 void		loop_healt(t_global *global);
 int			wait_philo(t_global *global);
+void		ft_mutex_destroy(t_global *global);
 
 	//5_put_philo.c
 void		put_success(t_philo *philo, int statut);

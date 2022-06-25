@@ -36,16 +36,15 @@ void	loop_philo(void *philo_void)
 	philo = (t_philo *)philo_void;
 	philo->last_meal_timestamp = ft_timestamp();
 	pthread_create(&(philo->thread_id), NULL, loop_healt, philo);
-	pthread_detach(philo->thread_id);
 	if (philo->philo_id % 2)
-		usleep(philo->global->time_to_eat * 100 / 2);
+		usleep(15000);
 	else
 		one_fork(philo->global, philo->philo_id);
 	while (philo->statut != DEAD && philo->statut != DONE)
 	{
 		loop_philo_next(philo);
 	}
-	free_fork(philo->global);
+	pthread_join(philo->thread_id, NULL);
 	if (philo->statut == DEAD)
 		exit(EXIT_FAILURE);
 	exit(EXIT_SUCCESS);

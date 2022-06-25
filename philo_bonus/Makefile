@@ -123,22 +123,18 @@ norm:
 		@norminette $(SRC_PATH)
 		@printf "${NOCOL}"
 
-all_test: 
-
-m_tester:
-		@cd Test/socrates && python3 socrates.py ../..
 		
 test1: 
-		@./Bin/philo 4 1000 500 500
+		@./Bin/philo_bonus 4 1000 500 500
 
 test2: 
-		@./Bin/philo 4 1000 501 500
+		@./Bin/philo_bonus 4 1000 501 500
 
 test3: 
-		@./Bin/philo 4 1000 500 501
+		@./Bin/philo_bonus 4 1000 500 501
 
 test4: 
-		@./Bin/philo 4 1000 500 500  2
+		@./Bin/philo_bonus 4 1000 500 500  2
 
 push:
 		@git add .

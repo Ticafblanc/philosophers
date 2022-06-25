@@ -19,7 +19,7 @@
 # include <sys/time.h>
 # include <sys/stat.h>
 # include <libft.h>
-#include <signal.h>
+# include <signal.h>
 
 # define THINK		1
 # define ONE_FORK	2
@@ -40,6 +40,7 @@ typedef struct s_global
 	int				time_to_sleep;
 	int				number_of_times_each_philosopher_must_eat;
 	t_philo			**philo;
+	sem_t			*check;
 	sem_t			*priority;
 	sem_t			*forks;
 	sem_t			*prints;

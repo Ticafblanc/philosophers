@@ -40,9 +40,3 @@ void	sleep_philo(t_philo *philo)
 	sem_post(philo->global->forks);
 	sem_post(philo->global->forks);
 }
-
-void	free_fork(t_global	*global)
-{
-	sem_post(global->forks);
-	sem_post(global->forks);
-}

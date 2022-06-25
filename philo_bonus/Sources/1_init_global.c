@@ -32,7 +32,8 @@ int	init_philo(t_global **global)
 		philo[id]->global = (*global);
 		philo[id]->statut = THINK;
 		if ((*global)->number_of_times_each_philosopher_must_eat > 0)
-			philo[id]->number_eat = (*global)->number_of_times_each_philosopher_must_eat;
+			philo[id]->number_eat = (*global)
+				->number_of_times_each_philosopher_must_eat;
 		else
 			philo[id]->number_eat = -1;
 		id++;
@@ -55,6 +56,18 @@ int	fill_data(char *argv)
 	return (ft_atol(argv));
 }
 
+static void	init_sem(t_global **global)
+{
+	sem_unlink("sem_priority");
+	(*global)->priority = sem_open("sem_priority", O_CREAT, S_IRWXU,
+			(*global)->number_of_philosophers);
+	sem_unlink("sem_prints");
+	(*global)->prints = sem_open("sem_prints", O_CREAT, S_IRWXU, 1);
+	sem_unlink("sem_forks");
+	(*global)->forks = sem_open("sem_forks", O_CREAT, S_IRWXU,
+			(*global)->number_of_philosophers);
+}
+
 int	init_global(t_global **global, char **argv)
 {
 	(*global) = (t_global *)malloc(sizeof(t_global));
@@ -65,20 +78,17 @@ int	init_global(t_global **global, char **argv)
 	(*global)->time_to_eat = fill_data(argv[3]);
 	(*global)->time_to_sleep = fill_data(argv[4]);
 	if (argv[5])
+	{
 		(*global)->number_of_times_each_philosopher_must_eat
 			= fill_data(argv[5]);
+		if ((*global)->number_of_times_each_philosopher_must_eat == -1)
+			return (2);
+	}
 	else
 		(*global)->number_of_times_each_philosopher_must_eat = -1;
 	if ((*global)->number_of_philosophers < 1 || (*global)->time_to_die < 0
 		|| (*global)->time_to_eat < 0 || (*global)->time_to_sleep < 0)
 		return (2);
-	sem_unlink("sem_priority");
-	(*global)->priority = sem_open("sem_priority", O_CREAT, S_IRWXU,
-			(*global)->number_of_philosophers - 1);
-	sem_unlink("sem_prints");
-	(*global)->prints = sem_open("sem_prints", O_CREAT, S_IRWXU, 1);
-	sem_unlink("sem_forks");
-	(*global)->forks = sem_open("sem_forks", O_CREAT, S_IRWXU,
-			(*global)->number_of_philosophers);
+	init_sem(global);
 	return (init_philo(global));
 }

@@ -40,13 +40,32 @@ void	*loop_healt(void *philo_void)
 	while (philo->statut != DEAD && philo->statut != DONE)
 	{
 		if ((philo->last_meal_timestamp + philo->global->time_to_die)
-			<= ft_timestamp())
+			< ft_timestamp ())
 			philo->statut = DEAD;
 		if (philo->number_eat == 0)
 			philo->statut = DONE;
+		if (philo->statut == DONE || philo->statut == DEAD)
+			break ;
+		usleep(1000);
 	}
-	put_success(philo);
+	if (philo->statut == DEAD)
+	{
+		sem_wait(philo->global->prints);
+		printf("%lld %d died\n", ft_timestamp()
+			- philo->global->start_time, philo->philo_id);
+		exit (EXIT_FAILURE);
+	}
 	return (0);
+}
+
+static void	ft_close(t_global *global)
+{
+	sem_close(global->priority);
+	sem_close(global->forks);
+	sem_close(global->prints);
+	sem_unlink("sem_priority");
+	sem_unlink("sem_prints");
+	sem_unlink("sem_forks");
 }
 
 int	wait_philo(t_global *global)
@@ -62,17 +81,12 @@ int	wait_philo(t_global *global)
 		{
 			id = -1;
 			while (++id < global->number_of_philosophers)
-				kill(global->philo[id]->pid_id, SIGTERM);
+				kill(global->philo[id]->pid_id, SIGKILL);
 		}
 		id++;
 	}
 	if (status == 0)
 		printf("done\n");
-	sem_close(global->priority);
-	sem_close(global->forks);
-	sem_close(global->prints);
-	sem_unlink("sem_priority");
-	sem_unlink("sem_prints");
-	sem_unlink("sem_forks");
+	ft_close(global);
 	return (7);
 }

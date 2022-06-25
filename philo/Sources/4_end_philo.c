@@ -51,6 +51,7 @@ void	loop_healt(t_global *global)
 			if (global->number_of_times_each_philosopher_must_eat == 0)
 				global->statut = DONE;
 		}
+		usleep(10);
 	}
 	put_success(global->philo[--id], global->statut);
 	return ;
@@ -71,4 +72,14 @@ int	wait_philo(t_global *global)
 	}
 	pthread_mutex_destroy(&global->print);
 	return (7);
+}
+
+void	ft_mutex_destroy(t_global *global)
+{
+	int	id;
+
+	id = 0;
+	while (id < global->number_of_philosophers)
+		pthread_mutex_destroy(&global->philo[id++]->fork);
+	pthread_mutex_destroy(&global->print);
 }

@@ -16,10 +16,8 @@ void	put_success(t_philo *philo)
 {
 	sem_wait(philo->global->prints);
 	if (philo->statut == DEAD)
-		printf("%lld %d died\n", ft_timestamp() - philo->global->start_time, philo->philo_id);
-	// else if (philo->statut == DONE)
-	// 	printf("done\n");
-	sem_post(philo->global->prints);
+		printf("%lld %d died\n", ft_timestamp()
+			- philo->global->start_time, philo->philo_id);
 }
 
 int	put_philo(t_philo *philo, int statut)
@@ -33,13 +31,16 @@ int	put_philo(t_philo *philo, int statut)
 			ft_timestamp() - philo->global->start_time, philo->philo_id);
 	else if (statut == EAT
 		&& philo->statut != DEAD && philo->statut != DONE)
-		printf("%lld %d is eating\n", ft_timestamp() - philo->global->start_time, philo->philo_id);
+		printf("%lld %d is eating\n", ft_timestamp()
+			- philo->global->start_time, philo->philo_id);
 	else if (statut == SLEEP
 		&& philo->statut != DEAD && philo->statut != DONE)
-		printf("%lld %d is sleeping\n", ft_timestamp() - philo->global->start_time, philo->philo_id);
+		printf("%lld %d is sleeping\n", ft_timestamp()
+			- philo->global->start_time, philo->philo_id);
 	else if (statut == THINK
 		&& philo->statut != DEAD && philo->statut != DONE)
-		printf("%lld %d is thinking\n", ft_timestamp() - philo->global->start_time, philo->philo_id);
+		printf("%lld %d is thinking\n", ft_timestamp()
+			- philo->global->start_time, philo->philo_id);
 	sem_post(philo->global->prints);
 	return (0);
 }

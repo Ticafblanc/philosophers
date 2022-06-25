@@ -74,6 +74,7 @@ int	free_philo_2(t_global *global, int flag)
 	}
 	if (flag == 7 || flag == 8)
 	{
+		ft_mutex_destroy(global);
 		ft_free_pp((void **)global->philo);
 		free (global);
 		return (EXIT_SUCCESS);
