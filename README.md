@@ -54,5 +54,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Contact
 
-For any questions or feedback, reach out to me at [your_email@example.com](mailto:your_email@example.com).
+For any questions or feedback, reach out to me on [GitHub profil](https://github.com/Ticafblanc)
 
