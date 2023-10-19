@@ -12,21 +12,15 @@
 
 #include <libft.h>
 
-int	ft_check_extension(char *str, char *extension)
-{
-	int	len_str;
-	int	len_ext;
-	int	i;
+int ft_check_extension(char *str, char *extension) {
+  int len_str;
+  int len_ext;
 
-	len_str = ft_strlen(str);
-	len_ext = ft_strlen(extension);
-	i = 0;
-	while (len_ext > 0)
-	{
-		if (extension[--len_ext] == str[--len_str])
-			i++;
-		else
-			return (-1);
-	}
-	return (1);
+  len_str = ft_strlen(str);
+  len_ext = ft_strlen(extension);
+  while (len_ext > 0) {
+    if (extension[--len_ext] != str[--len_str])
+      return (-1);
+  }
+  return (1);
 }
